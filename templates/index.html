@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Voting Page</title>
+    <link rel="stylesheet" href="stylei.css">
+    <style>
+        /* General Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: #333;
+            flex-direction: column;
+            padding: 20px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        h1 {
+            margin-bottom: 30px;
+            font-size: 2.5rem;
+            text-align: center;
+            transition: color 0.3s;
+        }
+
+        /* Light Theme */
+        .light-theme {
+            background-color: #FEF9E1;
+            color: #333;
+        }
+
+        .light-theme h1 {
+            color: #5e3b6e;
+        }
+
+        /* Dark Theme */
+        .dark-theme {
+            background-color: #333;
+            color: #fff;
+        }
+
+        .dark-theme h1 {
+            color: #E6E6E6;
+        }
+
+        /* Candidate Section */
+        #candidates {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+            max-width: 1200px;
+            width: 100%;
+        }
+
+        .candidate {
+            background-color: #ffffff;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: center;
+            padding: 20px;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .candidate:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .candidate img {
+            width: 100%;
+            height: 10em;
+            border-radius: 8px;
+            transition: transform 0.3s ease;
+        }
+
+        .candidate img:hover {
+            transform: scale(1.1);
+        }
+
+        .candidate h3 {
+            font-size: 1.5rem;
+            margin-top: 15px;
+            color: #4a4a4a;
+        }
+
+        .candidate p {
+            font-size: 1rem;
+            margin-top: 5px;
+            color: #777;
+        }
+
+        form {
+            margin-top: 20px;
+        }
+
+        button {
+            background-color: #A31D1D;
+            color: white;
+            font-size: 1.1rem;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #6D2323;
+        }
+
+        /* Theme toggle button styling */
+        .theme-toggle {
+            background-color: #6D2323;
+            color: white;
+            font-size: 1rem;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            margin: 20px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .theme-toggle:hover {
+            background-color: #A31D1D;
+        }
+
+        /* Media Queries for Responsiveness */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            #candidates {
+                grid-template-columns: 1fr;
+            }
+
+            .candidate {
+                padding: 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            .candidate h3 {
+                font-size: 1.3rem;
+            }
+
+            .candidate p {
+                font-size: 0.9rem;
+            }
+
+            button {
+                padding: 8px 15px;
+            }
+        }
+
+    </style>
+</head>
+<body class="light-theme">
+    <h1>Vote for Your Favorite Candidate!</h1>
+
+    <button class="theme-toggle" onclick="toggleTheme()">Switch to Dark Mode</button>
+
+    <div id="candidates">
+        {% for candidate in candidates %}
+            <div class="candidate">
+                <img src="{{ url_for('static', filename='images/' + candidate.image) }}" alt="{{ candidate.name }}">
+                <h3>{{ candidate.name }}</h3>
+               
+                <form action="{{ url_for('vote', candidate_name=candidate.name) }}" method="POST">
+                    <button type="submit">Vote</button>
+                </form>
+            </div>
+        {% endfor %}
+    </div>
+
+    <script>
+        function toggleTheme() {
+            const body = document.body;
+            const button = document.querySelector('.theme-toggle');
+
+            body.classList.toggle('dark-theme');
+            body.classList.toggle('light-theme');
+
+            if (body.classList.contains('dark-theme')) {
+                button.textContent = 'Switch to Light Mode';
+            } else {
+                button.textContent = 'Switch to Dark Mode';
+            }
+        }
+    </script>
+</body>
+</html>

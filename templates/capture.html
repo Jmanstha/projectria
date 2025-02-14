@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Capture Your Face</title>
+    <style>
+        #webcam {
+            width: 100%;
+            height: auto;
+        }
+        .container {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Capture Your Face</h1>
+        <video id="webcam" autoplay></video>
+        <br><br>
+        <button onclick="captureImage()">Capture Image</button>
+        <canvas id="canvas" style="display: none;"></canvas>
+    </div>
+
+    <script>
+        const video = document.getElementById('webcam');
+        const canvas = document.getElementById('canvas');
+        const context = canvas.getContext('2d');
+
+        // Get user's webcam feed
+        navigator.mediaDevices.getUserMedia({ video: true })
+            .then(stream => {
+                video.srcObject = stream;
+            })
+            .catch(error => {
+                console.error('Error accessing webcam:', error);
+            });
+
+        function captureImage() {
+            // Set canvas size to match video dimensions
+            canvas.width = video.videoWidth;
+            canvas.height = video.videoHeight;
+
+            // Draw video frame on canvas
+            context.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+            // Convert canvas to base64 image
+            const imageData = canvas.toDataURL('image/jpeg');
+
+            // Send captured image to server via AJAX
+            fetch('/capture_image', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ image: imageData })
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert(data.message);
+                if (data.status === "success") {
+                    // If face match is successful, redirect to the index page
+                    window.location.href = '/';  // Redirect to the Flask index route
+                }
+            })
+            .catch(error => {
+                console.error('Error sending image:', error);
+            });
+        }
+    </script>
+</body>
+</html>

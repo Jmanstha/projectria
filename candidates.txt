@@ -1,0 +1,4 @@
+Alice|person1.jpg
+Bob|person2.jpg
+Charlie|person3.jpg
+hari|person4.jpg

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thank You</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f0f8ff;
+            margin: 0;
+            padding: 0;
+            background-image: url('hackathon/Coatofemblem.png'); /* Use the path to your image */
+            background-repeat: no-repeat;
+            background-size: contain; /* Or cover, depending on your desired effect */
+            background-position: center; /* You can also adjust to top, left, etc. */
+            background-attachment: fixed; /* Keeps the watermark in place while scrolling */
+            
+            /* To make the watermark more transparent */
+            position: relative;
+           
+        }
+
+        h1 {
+            color: #4CAF50;
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        p {
+            color: #333;
+            font-size: 1.2em;
+            margin-top: 20px;
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        button {
+            margin-top: 30px;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        /* Animation for fade-in effect */
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Thank you for voting!</h1>
+    <p>Your vote has been successfully cast.</p>
+    <button onclick="redirectToHomePage()">Go to Home</button>
+
+    <script>
+        function redirectToHomePage() {
+            // Redirect to the homepage (you can change the URL here)
+            window.location.href = 'login';
+        }
+    </script>
+</body>
+</html>

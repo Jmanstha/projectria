@@ -1,0 +1,127 @@
+/* General Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+}
+
+body {
+    background-color: #f4f4f9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    color: #333;
+    flex-direction: column;
+    padding: 20px;
+}
+
+h1 {
+    color: #5e3b6e;
+    margin-bottom: 30px;
+    font-size: 2.5rem;
+    text-align: center;
+}
+
+/* Candidate Section */
+#candidates {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+    max-width: 1200px;
+    width: 100%;
+}
+
+.candidate {
+    background-color: #ffffff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-align: center;
+    padding: 20px;
+    cursor: pointer;
+    position: relative;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.candidate:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+}
+
+.candidate img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    transition: transform 0.3s ease;
+}
+
+.candidate img:hover {
+    transform: scale(1.1);
+}
+
+.candidate h3 {
+    font-size: 1.5rem;
+    margin-top: 15px;
+    color: #4a4a4a;
+}
+
+.candidate p {
+    font-size: 1rem;
+    margin-top: 5px;
+    color: #777;
+}
+
+form {
+    margin-top: 20px;
+}
+
+button {
+    background-color: #5e3b6e;
+    color: white;
+    font-size: 1.1rem;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #4a2d56;
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 2rem;
+    }
+
+    #candidates {
+        grid-template-columns: 1fr;
+    }
+
+    .candidate {
+        padding: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 1.8rem;
+    }
+
+    .candidate h3 {
+        font-size: 1.3rem;
+    }
+
+    .candidate p {
+        font-size: 0.9rem;
+    }
+
+    button {
+        padding: 8px 15px;
+    }
+}
